@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Your Name — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================
+       Editable placeholders are marked with: /* <-- EDIT --> */
+       Replace text, images, and links in the HTML below.
+       ========================== */
+
+    :root{
+      --bg1:#0f1724;
+      --bg2:#071024;
+      --glass: rgba(255,255,255,0.06);
+      --accent: #7c5cff;
+      --accent-2: #00d4ff;
+      --muted: rgba(255,255,255,0.65);
+      --card: rgba(255,255,255,0.03);
+      --radius: 14px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      min-height:100%;
+      color:#e6eef8;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(124,92,255,0.12), transparent),
+                  radial-gradient(1000px 500px at 90% 90%, rgba(0,212,255,0.06), transparent),
+                  linear-gradient(180deg,var(--bg1),var(--bg2));
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    .container{max-width:1100px;margin:0 auto;padding:32px}
+
+    /* NAV */
+    header{position:fixed;left:0;right:0;top:16px;display:flex;justify-content:center;pointer-events:none;z-index:60}
+    .nav-inner{pointer-events:auto;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);backdrop-filter: blur(8px);padding:10px 16px;border-radius:999px;display:flex;gap:10px;align-items:center}
+    .logo{font-weight:800;padding:6px 12px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#041027}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px}
+    nav a:hover{color:#fff;background:rgba(255,255,255,0.03)}
+
+    /* HERO */
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center;padding-top:110px;padding-bottom:80px}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:32px;border-radius:20px;box-shadow:0 6px 30px rgba(2,6,23,0.6)}
+    h1{font-size:44px;margin:0 0 8px;letter-spacing:-0.02em}
+    .sub{color:var(--muted);margin-bottom:20px}
+    .cta{display:inline-flex;gap:10px;align-items:center}
+    .btn{padding:10px 16px;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#041027;font-weight:600;border:none;cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    /* PROFILE CARD */
+    .profile{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:22px;border-radius:20px;text-align:center}
+    .avatar{width:120px;height:120px;border-radius:20px;display:inline-block;background-size:cover;background-position:center;margin-bottom:12px}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* SECTIONS */
+    section{margin-bottom:56px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+
+    .card{background:var(--card);padding:18px;border-radius:14px;backdrop-filter: blur(6px);transition:transform .35s ease, box-shadow .35s ease}
+    .card:hover{transform:translateY(-8px);box-shadow:0 12px 40px rgba(2,6,23,0.6)}
+    .project-thumb{height:160px;border-radius:10px;background-size:cover;background-position:center;margin-bottom:12px}
+
+    footer{padding:28px 0;border-top:1px solid rgba(255,255,255,0.03);text-align:center;color:var(--muted)}
+
+    /* small screens */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;}
+      .grid-3{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:560px){
+      .grid-3{grid-template-columns:1fr}
+      header{top:10px;padding:0 12px}
+      h1{font-size:34px}
+    }
+
+    /* subtle entry animations */
+    .reveal{opacity:0;transform:translateY(10px);transition:opacity .6s ease, transform .6s ease}
+    .reveal.show{opacity:1;transform:none}
+
+    /* floating orbs */
+    .orb{position:fixed;border-radius:50%;filter:blur(40px);opacity:.22;z-index:0;pointer-events:none}
+    .orb.one{width:360px;height:360px;left:-80px;top:-40px;background:linear-gradient(90deg,var(--accent),transparent)}
+    .orb.two{width:260px;height:260px;right:-60px;bottom:-40px;background:linear-gradient(90deg,var(--accent-2),transparent)}
+
+    /* contact form small */
+    .contact-form{display:flex;flex-direction:column;gap:8px}
+    input,textarea{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:10px;border-radius:10px;color:inherit}
+
+    .socials{display:flex;gap:8px;justify-content:center}
+    .socials a{padding:8px;border-radius:10px;background:rgba(255,255,255,0.02);text-decoration:none;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+
+  <header>
+    <div class="nav-inner container">
+      <div class="logo">YourName</div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-card reveal" id="hero-left">
+        <h1><!-- <-- EDIT: Your name / headline -->Your Name</h1>
+        <div class="sub"><!-- <-- EDIT: One-line headline / profession -->Freelance Data Entry Specialist • Organized • Fast • Accurate</div>
+
+        <p class="small"><!-- <-- EDIT: Short bio (2-3 sentences) -->Hi — I'm a detail-oriented data entry specialist with 4+ years of experience turning messy spreadsheets into structured, reliable datasets. I help small businesses and freelancers automate repetitive tasks and keep their data spotless.</p>
+
+        <div style="margin-top:18px" class="cta">
+          <button class="btn" id="download-resume">Download Resume</button>
+          <a class="btn ghost" href="#contact">Contact</a>
+        </div>
+
+        <div style="margin-top:18px;color:var(--muted);font-size:13px">Available for remote & contract work • Open to short-term projects</div>
+      </div>
+
+      <aside class="profile reveal" id="hero-right">
+        <div class="avatar" id="avatar" style="background-image:url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop&s=placeholder');">
+        </div>
+        <div style="font-weight:700"><!-- <-- EDIT: Display name -->Your Name</div>
+        <div class="small"><!-- <-- EDIT: Role or location -->Based in Philippines • Remote</div>
+
+        <div style="margin-top:14px">
+          <div class="small">Skills</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;justify-content:center">
+            <span style="background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;font-size:13px">Data Entry</span>
+            <span style="background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;font-size:13px">Excel</span>
+            <span style="background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;font-size:13px">Google Sheets</span>
+          </div>
+        </div>
+
+        <div style="margin-top:16px" class="small">Connect</div>
+        <div style="margin-top:8px;display:flex;gap:8px;justify-content:center">
+          <!-- <-- EDIT: Replace # with your profile links -->
+          <a href="#">LinkedIn</a>
+          <a href="#">Facebook</a>
+          <a href="#">Email</a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="reveal">
+      <h2 style="margin-top:6px">About</h2>
+      <div class="hero-card" style="margin-top:12px">
+        <p class="small"><!-- <-- EDIT: Longer about text -->I deliver clean, validated data ready for analysis, reporting, and automation. My process includes double-entry verification, formula-driven quality checks, and small scripts for repetitive tasks (if requested). I am comfortable with CSV, XLSX, Airtable, and Google Sheets workflows.</p>
+
+        <div style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap">
+          <div class="card" style="flex:1;min-width:180px">
+            <div style="font-weight:700">Experience</div>
+            <div class="small" style="margin-top:6px">4+ years working with SMBs and freelancers</div>
+          </div>
+          <div class="card" style="flex:1;min-width:180px">
+            <div style="font-weight:700">Tools</div>
+            <div class="small" style="margin-top:6px">Excel, Google Sheets, Airtable, Zapier</div>
+          </div>
+          <div class="card" style="flex:1;min-width:180px">
+            <div style="font-weight:700">Rate</div>
+            <div class="small" style="margin-top:6px">Hourly or project — negotiable</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK / PORTFOLIO -->
+    <section id="work" class="reveal">
+      <h2>Selected Work</h2>
+      <div class="grid-3" style="margin-top:12px">
+        <!-- Card 1 -->
+        <div class="card">
+          <div class="project-thumb" style="background-image:url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1400&auto=format&fit=crop&s=placeholder');"></div>
+          <div style="font-weight:700">Project Title</div>
+          <div class="small">Short description describing what you did — e.g., cleaned 10k+ product rows, standardized SKUs, added categories.</div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+          <div class="project-thumb" style="background-image:url('https://images.unsplash.com/photo-1526378727659-6e6f7f4b3c8a?q=80&w=1400&auto=format&fit=crop&s=placeholder');"></div>
+          <div style="font-weight:700">Project Title</div>
+          <div class="small">Short description — e.g., built a monthly report and automated imports with Apps Script.</div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+          <div class="project-thumb" style="background-image:url('https://images.unsplash.com/photo-1492724441997-5dc865305da7?q=80&w=1400&auto=format&fit=crop&s=placeholder');"></div>
+          <div style="font-weight:700">Project Title</div>
+          <div class="small">Short description — e.g., migrated legacy CSVs into Airtable and created views for non-technical staff.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="reveal">
+      <h2>Contact</h2>
+      <div class="hero-card" style="margin-top:12px;display:grid;grid-template-columns:1fr 320px;gap:18px">
+        <div>
+          <p class="small">Want to work together? Tell me about your project — budget, timeline, and what you already have (files, sample rows, etc.).</p>
+          <div style="margin-top:12px">
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('This is a placeholder form — replace with your email handling or external form link.');">
+              <input placeholder="Your name" required />
+              <input placeholder="Email" type="email" required />
+              <textarea placeholder="Short message" rows="4" required></textarea>
+              <div style="display:flex;gap:8px;margin-top:8px">
+                <button class="btn" type="submit">Send</button>
+                <button class="btn ghost" type="button" onclick="window.location='mailto:you@example.com'">Email me</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <aside style="padding:14px;border-radius:12px;background:rgba(255,255,255,0.02);align-self:start">
+          <div style="font-weight:700">Quick Contact</div>
+          <div class="small" style="margin-top:6px">Email: you@example.com</div>
+          <div class="small" style="margin-top:6px">Location: Philippines</div>
+
+          <div style="margin-top:12px" class="socials">
+            <a href="#">LinkedIn</a>
+            <a href="#">Upwork</a>
+            <a href="#">Portfolio</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <footer class="reveal">
+      <div class="small">© <!-- <-- EDIT: Year or name -->2025 Your Name — Built with ❤️</div>
+    </footer>
+
+  </main>
+
+  <script>
+    // small utilities: reveal on scroll + smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const href = a.getAttribute('href');
+        if(href.startsWith('#')){
+          e.preventDefault();
+          const el = document.querySelector(href);
+          if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      })
+    });
+
+    const revealEls = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(ent=>{
+        if(ent.isIntersecting) ent.target.classList.add('show');
+      });
+    },{threshold:0.12});
+    revealEls.forEach(e=>obs.observe(e));
+
+    // Resume button sample
+    document.getElementById('download-resume').addEventListener('click', ()=>{
+      // <-- EDIT: Replace URL with your resume file link or remove
+      const url = 'https://example.com/your-resume.pdf';
+      window.open(url,'_blank');
+    });
+
+    // small floating motion for orbs
+    let t=0;
+    function floatOrbs(){
+      t+=0.01;
+      const o1 = document.querySelector('.orb.one');
+      const o2 = document.querySelector('.orb.two');
+      if(o1) o1.style.transform = `translateY(${Math.sin(t)*6}px) translateX(${Math.cos(t/2)*8}px)`;
+      if(o2) o2.style.transform = `translateY(${Math.cos(t/1.2)*6}px) translateX(${Math.sin(t/2.5)*8}px)`;
+      requestAnimationFrame(floatOrbs);
+    }
+    floatOrbs();
+
+    // quick editable demo: double click avatar to change image (for local editing)
+    document.getElementById('avatar').addEventListener('dblclick', ()=>{
+      const url = prompt('Paste image URL to use as avatar:');
+      if(url) document.getElementById('avatar').style.backgroundImage = `url('${url}')`;
+    });
+  </script>
+</body>
+</html>
